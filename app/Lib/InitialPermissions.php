@@ -3,24 +3,21 @@
  * Created by PhpStorm.
  * User: paulb
  * Date: 2019-05-31
- * Time: 23:49
+ * Time: 23:49.
  */
 
 namespace App\Lib;
 
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Exceptions\RoleDoesNotExist;
-
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class InitialPermissions
 {
-    function __construct() {
-
-
-        info(__METHOD__ . 'START');
+    public function __construct()
+    {
+        info(__METHOD__.'START');
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
-
 
         try {
             $role = Role::findByName('super-admin');
@@ -28,57 +25,55 @@ class InitialPermissions
             $role = Role::create(['name' => 'super-admin']);
         }
 
+        Permission::findOrCreate('always fail');
 
-        Permission::findOrCreate( 'always fail');
+        Permission::findOrCreate('user index');
+        Permission::findOrCreate('user add');
+        Permission::findOrCreate('user update');
+        Permission::findOrCreate('user view');
+        Permission::findOrCreate('user delete');
+        Permission::findOrCreate('user export-pdf');
+        Permission::findOrCreate('user export-excel');
 
+        Permission::findOrCreate('invite index');
+        Permission::findOrCreate('invite add');
+        Permission::findOrCreate('invite update');
+        Permission::findOrCreate('invite view');
+        Permission::findOrCreate('invite delete');
+        Permission::findOrCreate('invite export-pdf');
+        Permission::findOrCreate('invite export-excel');
 
-        Permission::findOrCreate( 'user index');
-        Permission::findOrCreate( 'user add');
-        Permission::findOrCreate( 'user update');
-        Permission::findOrCreate( 'user view');
-        Permission::findOrCreate( 'user delete');
-        Permission::findOrCreate( 'user export-pdf');
-        Permission::findOrCreate( 'user export-excel');
+        Permission::findOrCreate('applicant index');
+        Permission::findOrCreate('applicant add');
+        Permission::findOrCreate('applicant update');
+        Permission::findOrCreate('applicant view');
+        Permission::findOrCreate('applicant delete');
+        Permission::findOrCreate('applicant export-pdf');
+        Permission::findOrCreate('applicant export-excel');
 
-        Permission::findOrCreate( 'invite index');
-        Permission::findOrCreate( 'invite add');
-        Permission::findOrCreate( 'invite update');
-        Permission::findOrCreate( 'invite view');
-        Permission::findOrCreate( 'invite delete');
-        Permission::findOrCreate( 'invite export-pdf');
-        Permission::findOrCreate( 'invite export-excel');
+        Permission::findOrCreate('assignment index');
+        Permission::findOrCreate('assignment add');
+        Permission::findOrCreate('assignment update');
+        Permission::findOrCreate('assignment view');
+        Permission::findOrCreate('assignment delete');
+        Permission::findOrCreate('assignment export-pdf');
+        Permission::findOrCreate('assignment export-excel');
 
-        Permission::findOrCreate( 'applicant index');
-        Permission::findOrCreate( 'applicant add');
-        Permission::findOrCreate( 'applicant update');
-        Permission::findOrCreate( 'applicant view');
-        Permission::findOrCreate( 'applicant delete');
-        Permission::findOrCreate( 'applicant export-pdf');
-        Permission::findOrCreate( 'applicant export-excel');
+        Permission::findOrCreate('conviction index');
+        Permission::findOrCreate('conviction add');
+        Permission::findOrCreate('conviction update');
+        Permission::findOrCreate('conviction view');
+        Permission::findOrCreate('conviction delete');
+        Permission::findOrCreate('conviction export-pdf');
+        Permission::findOrCreate('conviction export-excel');
 
-        Permission::findOrCreate( 'assignment index');
-        Permission::findOrCreate( 'assignment add');
-        Permission::findOrCreate( 'assignment update');
-        Permission::findOrCreate( 'assignment view');
-        Permission::findOrCreate( 'assignment delete');
-        Permission::findOrCreate( 'assignment export-pdf');
-        Permission::findOrCreate( 'assignment export-excel');
-
-        Permission::findOrCreate( 'conviction index');
-        Permission::findOrCreate( 'conviction add');
-        Permission::findOrCreate( 'conviction update');
-        Permission::findOrCreate( 'conviction view');
-        Permission::findOrCreate( 'conviction delete');
-        Permission::findOrCreate( 'conviction export-pdf');
-        Permission::findOrCreate( 'conviction export-excel');
-
-        Permission::findOrCreate( 'charge index');
-        Permission::findOrCreate( 'charge add');
-        Permission::findOrCreate( 'charge update');
-        Permission::findOrCreate( 'charge view');
-        Permission::findOrCreate( 'charge delete');
-        Permission::findOrCreate( 'charge export-pdf');
-        Permission::findOrCreate( 'charge export-excel');
+        Permission::findOrCreate('charge index');
+        Permission::findOrCreate('charge add');
+        Permission::findOrCreate('charge update');
+        Permission::findOrCreate('charge view');
+        Permission::findOrCreate('charge delete');
+        Permission::findOrCreate('charge export-pdf');
+        Permission::findOrCreate('charge export-excel');
 
         Permission::findOrCreate('data_source index');
         Permission::findOrCreate('data_source view');
@@ -120,8 +115,6 @@ class InitialPermissions
         Permission::findOrCreate('statute export-pdf');
         Permission::findOrCreate('statute export-excel');
 
-
-
         Permission::findOrCreate('status index');
         Permission::findOrCreate('status add');
         Permission::findOrCreate('status update');
@@ -130,9 +123,6 @@ class InitialPermissions
         Permission::findOrCreate('status export-pdf');
         Permission::findOrCreate('status export-excel');
 
-
-
-
         try {
             $role = Role::findByName('cant');
         } catch (RoleDoesNotExist $e) {
@@ -140,7 +130,6 @@ class InitialPermissions
         }
 
         $role->givePermissionTo(['always fail']);
-
 
         try {
             $role = Role::findByName('only index');
@@ -202,8 +191,6 @@ class InitialPermissions
             'charge export-pdf',
             'charge export-excel',
 
-
-
             'data_source index',
             'data_source add',
             'data_source update',
@@ -227,7 +214,6 @@ class InitialPermissions
             'jurisdiction_type delete',
             'jurisdiction_type export-pdf',
             'jurisdiction_type export-excel',
-
 
             'status index',
             'status add',
@@ -310,7 +296,6 @@ class InitialPermissions
             'jurisdiction export-pdf',
             'jurisdiction export-excel',
 
-
             'jurisdiction_type index',
             'jurisdiction_type add',
             'jurisdiction_type update',
@@ -327,13 +312,7 @@ class InitialPermissions
             'statute export-pdf',
             'statute export-excel',
 
-
-
-
         ]);
-
-
-
 
         try {
             $role = Role::findByName('read-only');
@@ -345,7 +324,6 @@ class InitialPermissions
 
             'user index',
 
-
             'applicant index',
             'applicant view',
 
@@ -354,7 +332,6 @@ class InitialPermissions
 
             'charge index',
             'charge view',
-
 
             'data_source index',
             'data_source view',
@@ -379,7 +356,75 @@ class InitialPermissions
         ]);
 
 
+        try {
+            $role = Role::findByName('Volunteer Lawyer');
+        } catch (RoleDoesNotExist $e) {
+            $role = Role::create(['name' => 'Volunteer Lawyer']);
+        }
+
+        $role->givePermissionTo([
+
+            'applicant index',
+            'applicant add',
+            'applicant update',
+            'applicant view',
+            'applicant export-pdf',
+            'applicant export-excel',
+
+            'conviction index',
+            'conviction add',
+            'conviction update',
+            'conviction view',
+            'conviction delete',
+            'conviction export-pdf',
+            'conviction export-excel',
+
+            'charge index',
+            'charge add',
+            'charge update',
+            'charge view',
+            'charge delete',
+            'charge export-pdf',
+            'charge export-excel',
+
+            'data_source index',
+            'data_source add',
+            'data_source update',
+            'data_source view',
+            'data_source delete',
+            'data_source export-pdf',
+            'data_source export-excel',
+
+            'jurisdiction index',
+            'jurisdiction add',
+            'jurisdiction update',
+            'jurisdiction view',
+            'jurisdiction delete',
+            'jurisdiction export-pdf',
+            'jurisdiction export-excel',
+
+
+            'jurisdiction_type index',
+            'jurisdiction_type add',
+            'jurisdiction_type update',
+            'jurisdiction_type view',
+            'jurisdiction_type delete',
+            'jurisdiction_type export-pdf',
+            'jurisdiction_type export-excel',
+
+            'statute index',
+            'statute add',
+            'statute update',
+            'statute view',
+            'statute delete',
+            'statute export-pdf',
+            'statute export-excel',
+        ]);
+
+
+
         info(__METHOD__ . 'END');
 
+        info(__METHOD__.'END');
     }
 }
